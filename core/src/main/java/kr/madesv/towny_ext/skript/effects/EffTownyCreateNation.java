@@ -9,6 +9,7 @@ import com.palmergames.bukkit.towny.exceptions.AlreadyRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
+import kr.madesv.towny_ext.MadeTownyExtensionPlugin;
 import lombok.SneakyThrows;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +26,7 @@ public class EffTownyCreateNation extends Effect {
 	private Expression<Number> bal;
 
 	@Inject
-	Logger logger;
+	MadeTownyExtensionPlugin plugin;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -67,9 +68,9 @@ public class EffTownyCreateNation extends Effect {
 			TownyUniverse.getInstance().getDataSource().saveNations();
 
 		} catch (NotRegisteredException ex1) {
-			logger.warning("Could not register nation: " + "\"" + nat.getSingle(e) + "\"");
+			plugin.getLogger().warning("Could not register nation: " + "\"" + nat.getSingle(e) + "\"");
 		} catch (AlreadyRegisteredException ex2) {
-			logger.warning(
+			plugin.getLogger().warning(
 					"Could not register nation: " + "\"" + nat.getSingle(e) + "\"" + ". Nation already exists in town");
 		}
 	}

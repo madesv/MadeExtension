@@ -7,7 +7,6 @@ import ch.njol.util.Kleenean;
 import com.palmergames.bukkit.towny.object.TownBlockType;
 import com.palmergames.bukkit.towny.object.TownBlockTypeHandler;
 import org.bukkit.event.Event;
-
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 

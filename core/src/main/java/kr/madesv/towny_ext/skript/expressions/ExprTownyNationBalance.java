@@ -7,7 +7,6 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import com.palmergames.bukkit.towny.TownyUniverse;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import org.bukkit.event.Event;
 
 import javax.annotation.Nullable;

@@ -6,10 +6,8 @@ import com.palmergames.bukkit.towny.Towny;
 import kr.madesv.towny_ext.skript.TownyRegistrar;
 import lombok.SneakyThrows;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import javax.inject.Inject;
 import java.util.Optional;
-import java.util.logging.Level;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class MadeTownyExtensionPlugin extends JavaPlugin {

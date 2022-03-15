@@ -3,11 +3,8 @@ package kr.madesv.towny_ext;
 import ch.njol.skript.Skript;
 import com.google.inject.*;
 import com.palmergames.bukkit.towny.Towny;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
-
 import java.util.Optional;
-import java.util.logging.Logger;
 
 public class MadeTownyExtensionModule extends AbstractModule {
     private final MadeTownyExtensionPlugin plugin;
@@ -22,14 +19,11 @@ public class MadeTownyExtensionModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        /**
-         * MadeTownyExtensionPlugin 과 Plugin 클래스를 plugin 인스턴스로 bind 한다.
-         *
-         **/
+        /*
+          MadeTownyExtensionPlugin 과 Plugin 클래스를 plugin 인스턴스로 bind 한다.
+         */
         bind(MadeTownyExtensionPlugin.class).toInstance(this.plugin);
         bind(Plugin.class).toInstance(this.plugin);
-
-        bind(Logger.class).toInstance(this.plugin.getLogger());
     }
 
     @Provides

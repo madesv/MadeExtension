@@ -9,16 +9,14 @@ import com.palmergames.bukkit.towny.exceptions.AlreadyRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.InvalidNameException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.*;
+import kr.madesv.towny_ext.MadeTownyExtensionPlugin;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
-
 import javax.annotation.Nullable;
 import javax.inject.Inject;
-
-;import java.util.Objects;
-import java.util.logging.Logger;
+import java.util.Objects;
 
 public class EffTownyCreateTown extends Effect {
     private Expression<String> s;
@@ -28,7 +26,7 @@ public class EffTownyCreateTown extends Effect {
     private Expression<OfflinePlayer> members;
 
     @Inject
-    Logger logger;
+    MadeTownyExtensionPlugin plugin;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -97,9 +95,9 @@ public class EffTownyCreateTown extends Effect {
             TownyUniverse.getInstance().getDataSource().saveTownBlocks();
 
         } catch (NotRegisteredException ex1) {
-            logger.warning("Could not register town: " + "\"" + s.getSingle(e) + "\"");
+            plugin.getLogger().warning("Could not register town: " + "\"" + s.getSingle(e) + "\"");
         } catch (AlreadyRegisteredException ex2) {
-            logger.warning("Could not register town: " + "\"" + s.getSingle(e) + "\"" + ". Town already exists");
+            plugin.getLogger().warning("Could not register town: " + "\"" + s.getSingle(e) + "\"" + ". Town already exists");
         } catch (InvalidNameException invalidNameException) {
             invalidNameException.printStackTrace();
         }

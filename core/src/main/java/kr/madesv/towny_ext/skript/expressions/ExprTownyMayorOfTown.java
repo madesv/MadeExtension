@@ -10,7 +10,6 @@ import com.palmergames.bukkit.towny.TownyUniverse;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
-
 import javax.annotation.Nullable;
 
 public class ExprTownyMayorOfTown extends SimpleExpression<OfflinePlayer> {

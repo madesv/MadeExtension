@@ -8,6 +8,7 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -15,6 +16,7 @@ public class ExprTownyTownOfPlayer extends SimpleExpression<String> {
 
 	private Expression<OfflinePlayer> resident;
 
+	@NotNull
 	@Override
 	public Class<? extends String> getReturnType() {
 		return String.class;
@@ -28,13 +30,14 @@ public class ExprTownyTownOfPlayer extends SimpleExpression<String> {
 		return true;
 	}
 
+	@NotNull
 	@Override
 	public String toString(@Nullable Event e, boolean paramBoolean) {
 		return "[sharpsk] [towny] town of %player%";
 	}
 
+	@NotNull
 	@Override
-	@Nullable
 	protected String[] get(Event e) {
 
 		Resident a = new Resident(resident.getSingle(e).getName());

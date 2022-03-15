@@ -9,7 +9,6 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
-
 import javax.annotation.Nullable;
 
 public class ExprTownyNationOfPlayer extends SimpleExpression<String> {

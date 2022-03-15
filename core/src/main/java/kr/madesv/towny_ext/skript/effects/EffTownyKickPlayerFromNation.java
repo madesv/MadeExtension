@@ -7,20 +7,18 @@ import ch.njol.util.Kleenean;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.EmptyTownException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import kr.madesv.towny_ext.MadeTownyExtensionPlugin;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
-
 import javax.annotation.Nullable;
 import javax.inject.Inject;
-
-;import java.util.logging.Logger;
 
 public class EffTownyKickPlayerFromNation extends Effect {
 	private Expression<String> s;
 	private Expression<OfflinePlayer> p;
 
 	@Inject
-	Logger logger;
+	MadeTownyExtensionPlugin plugin;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -44,9 +42,9 @@ public class EffTownyKickPlayerFromNation extends Effect {
 					.removeResident(TownyUniverse.getInstance().getResident(p.getSingle(e).getName()));
 		} catch (EmptyTownException ignored) {
 		} catch (NotRegisteredException ex2) {
-			logger.warning("Could not kick resident: " + "\"" + p.getSingle(e).getName() + "\""
+			plugin.getLogger().warning("Could not kick resident: " + "\"" + p.getSingle(e).getName() + "\""
 					+ " from town " + "\"" + s.getSingle(e) + "\"");
-			logger.warning("Resident is not in town: " + "\"" + s.getSingle(e) + "\"");
+			plugin.getLogger().warning("Resident is not in town: " + "\"" + s.getSingle(e) + "\"");
 			return;
 		}
 

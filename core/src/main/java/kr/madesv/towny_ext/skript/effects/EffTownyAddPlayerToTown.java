@@ -7,6 +7,7 @@ import ch.njol.util.Kleenean;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.AlreadyRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import kr.madesv.towny_ext.MadeTownyExtensionPlugin;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +21,7 @@ public class EffTownyAddPlayerToTown extends Effect {
 	private Expression<OfflinePlayer> p;
 
 	@Inject
-	Logger logger;
+	MadeTownyExtensionPlugin plugin;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -42,9 +43,9 @@ public class EffTownyAddPlayerToTown extends Effect {
 		try {
 			TownyUniverse.getInstance().getResident(p.getSingle(e).getName()).setTown(TownyUniverse.getInstance().getTown(s.getSingle(e)));
 		} catch (AlreadyRegisteredException ex3) {
-			logger.warning("Could not add resident: " + "\"" + p.getSingle(e).getName() + "\"" + " to town "
+			plugin.getLogger().warning("Could not add resident: " + "\"" + p.getSingle(e).getName() + "\"" + " to town "
 					+ "\"" + s.getSingle(e) + "\"");
-			logger.warning("Resident is already in town: " + "\"" + s.getSingle(e) + "\"");
+			plugin.getLogger().warning("Resident is already in town: " + "\"" + s.getSingle(e) + "\"");
 		}
 
 	}

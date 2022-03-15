@@ -13,6 +13,8 @@ import com.palmergames.bukkit.towny.object.WorldCoord;
 import lombok.SneakyThrows;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
+
 import javax.annotation.Nullable;
 
 public class ExprTownyTownBlocktypeAtLocation extends SimpleExpression<TownBlockType> {
@@ -40,8 +42,8 @@ public class ExprTownyTownBlocktypeAtLocation extends SimpleExpression<TownBlock
 		return true;
 	}
 
+	@NotNull
 	@Override
-	@Nullable
 	protected TownBlockType[] get(Event e) {
 		try {
 			return new TownBlockType[] { TownyUniverse.getInstance().getTownBlock(WorldCoord.parseWorldCoord(loc.getSingle(e))).getType() };

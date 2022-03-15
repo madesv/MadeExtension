@@ -7,7 +7,6 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.palmergames.bukkit.towny.event.*;
 import org.bukkit.event.Event;
-
 import javax.annotation.Nullable;
 
 public class ExprTownyEventNation extends SimpleExpression<String> {

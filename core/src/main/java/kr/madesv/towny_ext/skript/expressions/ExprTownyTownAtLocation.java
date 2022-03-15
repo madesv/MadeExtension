@@ -10,7 +10,6 @@ import com.palmergames.bukkit.towny.object.WorldCoord;
 import lombok.SneakyThrows;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
-
 import javax.annotation.Nullable;
 
 public class ExprTownyTownAtLocation extends SimpleExpression<String> {

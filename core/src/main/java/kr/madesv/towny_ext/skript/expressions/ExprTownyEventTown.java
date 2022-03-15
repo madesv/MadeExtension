@@ -9,7 +9,6 @@ import com.palmergames.bukkit.towny.event.*;
 import com.palmergames.bukkit.towny.event.town.TownUnclaimEvent;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import org.bukkit.event.Event;
-
 import javax.annotation.Nullable;
 
 public class ExprTownyEventTown extends SimpleExpression<String> {

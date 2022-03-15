@@ -7,19 +7,17 @@ import ch.njol.util.Kleenean;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.AlreadyRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import kr.madesv.towny_ext.MadeTownyExtensionPlugin;
 import org.bukkit.event.Event;
-
 import javax.annotation.Nullable;
 import javax.inject.Inject;
-
-import java.util.logging.Logger;
 
 public class EffTownyRenameTown extends Effect {
 	private Expression<String> s;
 	private Expression<String> s2;
 
 	@Inject
-	Logger logger;
+	MadeTownyExtensionPlugin plugin;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -43,11 +41,11 @@ public class EffTownyRenameTown extends Effect {
 				TownyUniverse.getInstance().getDataSource().renameTown(TownyUniverse.getInstance().getTown(s.getSingle(e)),
 						s2.getSingle(e));
 			} catch (AlreadyRegisteredException e1) {
-				logger.warning(
+				plugin.getLogger().warning(
 						"Could not rename town: " + "\"" + s.getSingle(e) + "\"" + " Town name already in use.");
 			}
 		} catch (NotRegisteredException ex) {
-			logger.warning("Could not rename town: " + "\"" + s.getSingle(e) + "\"" + " Town does not exist");
+			plugin.getLogger().warning("Could not rename town: " + "\"" + s.getSingle(e) + "\"" + " Town does not exist");
 			return;
 		}
 

@@ -7,7 +7,6 @@ import ch.njol.util.Kleenean;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Nation;
 import org.bukkit.event.Event;
-
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
