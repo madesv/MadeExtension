@@ -41,3 +41,8 @@ dependencies {
         Dependency.AOPALLIANCE
     )
 }
+
+tasks.shadowJar {
+    this.destinationDirectory.set(file("output/"))
+    this.archiveFileName.set("${bukkit.name}-${bukkit.version}.jar")
+}
