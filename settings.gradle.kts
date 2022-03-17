@@ -1,2 +1,2 @@
-rootProject.name = "MadeTownyExtension"
+rootProject.name = "MadeExtension"
 include("core")

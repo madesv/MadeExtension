@@ -1,3 +1,6 @@
+import com.vjh0107.gradle.*
+import com.vjh0107.gradle.Dependency
+
 plugins {
     kotlin("jvm")
     java
@@ -5,36 +8,42 @@ plugins {
     id("com.github.johnrengelman.shadow")
 }
 
-version = "1.0.0-RELEASE"
+version = "2.0.0-RELEASE"
 
 bukkit {
-    main = "kr.madesv.towny_ext.MadeTownyExtensionPlugin"
+    main = "kr.madesv.extension.MadeExtensionPlugin"
     apiVersion = "1.18"
-    name = "MadeTownyExtension"
+    name = "MadeExtension"
     author = "vjh0107"
     this.version = getVersion().toString()
     softDepend = listOf(
         "Skript",
-        "Towny"
+        "Towny",
+        "mcMMO",
+        "TownyChat"
     )
 }
 
 repositories {
-    mavenCentral()
-    mavenAll(
-        Dependency.MINECRAFT,
+    mavenOf(
+        Dependency.WORLDGUARD,
+        Dependency.SPIGOT,
         Dependency.SKRIPT,
-        Dependency.TOWNY
+        Dependency.TOWNY,
+        Dependency.MCMMO
     )
+    mavenCentral()
 }
 
 dependencies {
-    compileOnlyAll(
-        Dependency.MINECRAFT,
+    compileOnly(fileTree("libs"))
+    compileOnlyOf(
+        Dependency.SPIGOT,
         Dependency.SKRIPT,
-        Dependency.TOWNY
+        Dependency.TOWNY,
+        Dependency.MCMMO
     )
-    implementationAll(
+    implementationOf(
         Dependency.GUICE,
         Dependency.LOMBOK,
         Dependency.JAVAX_INJECT,
@@ -42,7 +51,17 @@ dependencies {
     )
 }
 
-tasks.shadowJar {
-    this.destinationDirectory.set(file("output/"))
-    this.archiveFileName.set("${bukkit.name}-${bukkit.version}.jar")
+tasks {
+    val testBukkitModulePath = "../TEST_BUKKIT"
+
+    shadowJar {
+        archiveFileName.set("${bukkit.name}-${bukkit.version}.jar")
+        destinationDirectory.set(file("$testBukkitModulePath/plugins"))
+    }
+
+    this.register<TestBukkitTask>("runTestBukkitTask") {
+        dependsOn("shadowJar")
+        bukkitFileName.set("1.18.2.jar")
+        testBukkitDir.set(file(testBukkitModulePath))
+    }
 }
