@@ -8,7 +8,7 @@ plugins {
     id("com.github.johnrengelman.shadow")
 }
 
-version = "2.0.1-RELEASE"
+version = "2.1.0-RELEASE"
 
 bukkit {
     main = "kr.madesv.extension.MadeExtensionPlugin"

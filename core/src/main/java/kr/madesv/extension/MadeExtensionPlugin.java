@@ -37,6 +37,15 @@ public class MadeExtensionPlugin extends JavaPlugin {
         MadeExtensionModule module = new MadeExtensionModule(this);
         injector = module.createInjector();
         injector.injectMembers(this);
+        if (maybeTowny.isPresent()) {
+            try {
+                TownyDateFormatOverrider.override();
+                this.getLogger().info("Towny의 SimpleDateFormat 필드를 성공적으로 override 하였습니다.");
+            } catch (Exception exception) {
+                this.getLogger().severe("Towny의 SimpleDateFormat 필드를 override 하는데에 성공한 줄 알았으나 실패하였습니다. Towny의 버전이 호환되지 않아 생기는 문제일 가능성이 높습니다.");
+                exception.printStackTrace();
+            }
+        }
         if (maybeSkript.isPresent()) {
             this.getLogger().info("스크립트 플러그인을 성공적으로 로드하였습니다.");
             this.getLogger().info("Extension들을 등록합니다...");
@@ -45,14 +54,6 @@ public class MadeExtensionPlugin extends JavaPlugin {
                 registerSkriptExtensionModule(new TownyRegistrar());
                 this.getLogger().info("Towny와 관련된 Extension을 성공적으로 등록하였습니다.");
                 maybeTownyChat.get().getLogger().info("TownyChat 이 성공적으로 MadeExtension과 연동되었습니다.");
-
-                try {
-                    TownyDateFormatOverrider.override();
-                    this.getLogger().info("Towny의 SimpleDateFormat 필드를 성공적으로 override 하였습니다.");
-                } catch (Exception exception) {
-                    this.getLogger().severe("Towny의 SimpleDateFormat 필드를 override 하는데에 성공한 줄 알았으나 실패하였습니다. Towny의 버전이 호환되지 않아 생기는 문제일 가능성이 높습니다.");
-                    exception.printStackTrace();
-                }
 
             } else {
                 this.getLogger().info("§cTowny와 TownyChat를 찾지 못하였습니다.");
