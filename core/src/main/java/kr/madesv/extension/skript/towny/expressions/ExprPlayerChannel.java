@@ -15,14 +15,15 @@ import org.bukkit.event.Event;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Optional;
+
 
 public class ExprPlayerChannel extends SimpleExpression {
 
     private Expression<Player> player;
+
+    @Inject
+    Optional<Chat> chat;
 
     @Override
     public Class<? extends String> getReturnType() {
@@ -31,6 +32,7 @@ public class ExprPlayerChannel extends SimpleExpression {
 
     @Override
     public boolean init(Expression<?>[] expr, int matchedPattern, Kleenean paramKleenean, SkriptParser.ParseResult Result) {
+        MadeExtensionPlugin.injector.injectMembers(this);
         this.player = (Expression<Player>) expr[0];
         return true;
     }
@@ -49,15 +51,9 @@ public class ExprPlayerChannel extends SimpleExpression {
     @Override
     protected String[] get(Event e) {
         Player player = this.player.getSingle(e);
-        Chat townyChat = (Chat) Bukkit.getServer().getPluginManager().getPlugin("TownyChat");
-        ArrayList<String> narr = new ArrayList<String>();
-        for (Channel channel :townyChat.getChannelsHandler().getAllChannels().values()) {
-            if (channel.isPresent(player.getName())) {
-               narr.add(channel.getName());
-            }
-        }
+        Chat townyChat = chat.get();
 
-        return narr.toArray(new String[narr.size()]);
+        return new String[]{townyChat.getPlayerChannel(player).getName()};
     }
 
 

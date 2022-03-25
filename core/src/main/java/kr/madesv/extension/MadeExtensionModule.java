@@ -21,9 +21,6 @@ public class MadeExtensionModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        /*
-          MadeTownyExtensionPlugin 과 Plugin 클래스를 plugin 인스턴스로 bind 한다.
-         */
         bind(MadeExtensionPlugin.class).toInstance(this.plugin);
     }
 
@@ -50,7 +47,6 @@ public class MadeExtensionModule extends AbstractModule {
     Optional<Chat> providesTownyChat() { return providePlugin("TownyChat"); }
 
     private <T> Optional<T> providePlugin(String pluginName) {
-        System.out.println("provide plugin called " + pluginName);
         Plugin nullablePlugin = this.plugin.getServer().getPluginManager().getPlugin(pluginName);
         return Optional.ofNullable(nullablePlugin)
                 .map(maybePlugin -> (T) maybePlugin);
