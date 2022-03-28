@@ -16,7 +16,7 @@ public class TownyReflection {
         FieldUtil.setFinalStatic(field, new SimpleDateFormat(format));
     }
 
-    private static void setPermissionCommonNameField(TownyPermission.ActionType actionType, String newCommonName) throws Exception {
+    private static void setTownyPermissionCommonNameField(TownyPermission.ActionType actionType, String newCommonName) throws Exception {
         Field field = TownyPermission.ActionType.class.getDeclaredField("commonName");
         if (!field.canAccess(actionType)) {
             field.setAccessible(true);
@@ -31,9 +31,9 @@ public class TownyReflection {
         setDateFormatField("lastOnlineFormatIncludeYear", "yyyy.MM.dd");
         setDateFormatField("fullDateFormat", "yyyy.MM.dd HH:mm");
 
-        setPermissionCommonNameField(TownyPermission.ActionType.BUILD, "설치");
-        setPermissionCommonNameField(TownyPermission.ActionType.DESTROY, "파괴");
-        setPermissionCommonNameField(TownyPermission.ActionType.ITEM_USE, "아이템");
-        setPermissionCommonNameField(TownyPermission.ActionType.SWITCH, "스위치");
+        setTownyPermissionCommonNameField(TownyPermission.ActionType.BUILD, "설치");
+        setTownyPermissionCommonNameField(TownyPermission.ActionType.DESTROY, "파괴");
+        setTownyPermissionCommonNameField(TownyPermission.ActionType.ITEM_USE, "아이템");
+        setTownyPermissionCommonNameField(TownyPermission.ActionType.SWITCH, "스위치");
     }
 }
