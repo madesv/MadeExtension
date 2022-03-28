@@ -219,8 +219,10 @@ public class TownyRegistrar extends SkriptRegistrarModule {
         Skript.registerExpression(ExprPlayerChannel.class, String.class, ExpressionType.SIMPLE, new String[]{"channel of %player%"});
         Skript.registerExpression(ExprAlliesOfNation.class, String.class, ExpressionType.SIMPLE, new String[]{"allies of %string%"});
         Skript.registerExpression(ExprEnemiesOfNation.class, String.class, ExpressionType.SIMPLE, new String[]{"enemies of %string%"});
-
-
+        Skript.registerExpression(ExprUpkeepOfNation.class, Number.class, ExpressionType.SIMPLE,
+                "[madesv] [towny] [bank] upkeep of nation %string%");
+        Skript.registerExpression(ExprUpkeepOfTown.class, Number.class, ExpressionType.SIMPLE,
+                "[madesv] [towny] [bank] upkeep of town %string%");
         // Towny Effects:
         Skript.registerEffect(EffTownyCreateTown.class,
                 "[madesv] [towny] create town %string% at %location% [with [bank] balance %-number%] [[and] with mayor %-offlineplayer%] [and residents %-offlineplayers%]");

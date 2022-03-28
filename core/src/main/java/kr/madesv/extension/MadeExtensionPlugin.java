@@ -8,7 +8,7 @@ import com.palmergames.bukkit.towny.Towny;
 import kr.madesv.extension.skript.SkriptRegistrarModule;
 import kr.madesv.extension.skript.mcmmo.McMMORegistrar;
 import kr.madesv.extension.skript.towny.TownyRegistrar;
-import kr.madesv.extension.towny.TownyDateFormatOverrider;
+import kr.madesv.extension.towny.TownyReflection;
 import lombok.SneakyThrows;
 import org.bukkit.plugin.java.JavaPlugin;
 import javax.inject.Inject;
@@ -39,7 +39,7 @@ public class MadeExtensionPlugin extends JavaPlugin {
         injector.injectMembers(this);
         if (maybeTowny.isPresent()) {
             try {
-                TownyDateFormatOverrider.override();
+                TownyReflection.override();
                 this.getLogger().info("Towny의 SimpleDateFormat 필드를 성공적으로 override 하였습니다.");
             } catch (Exception exception) {
                 this.getLogger().severe("Towny의 SimpleDateFormat 필드를 override 하는데에 성공한 줄 알았으나 실패하였습니다. Towny의 버전이 호환되지 않아 생기는 문제일 가능성이 높습니다.");

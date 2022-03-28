@@ -1,5 +1,8 @@
-import com.vjh0107.gradle.*
 import com.vjh0107.gradle.Dependency
+import com.vjh0107.gradle.TestBukkitTask
+import com.vjh0107.gradle.compileOnlyOf
+import com.vjh0107.gradle.implementationOf
+import com.vjh0107.gradle.mavenOf
 
 plugins {
     kotlin("jvm")
@@ -8,7 +11,7 @@ plugins {
     id("com.github.johnrengelman.shadow")
 }
 
-version = "2.1.0-RELEASE"
+version = "2.2.1-RELEASE"
 
 bukkit {
     main = "kr.madesv.extension.MadeExtensionPlugin"
@@ -49,6 +52,13 @@ dependencies {
         Dependency.JAVAX_INJECT,
         Dependency.AOPALLIANCE
     )
+    testImplementation(Dependency.TOWNY.dependency)
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 tasks {
