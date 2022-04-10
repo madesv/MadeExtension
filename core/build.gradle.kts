@@ -11,7 +11,7 @@ plugins {
     id("com.github.johnrengelman.shadow")
 }
 
-version = "2.2.1-RELEASE"
+version = "3.0.0"
 
 bukkit {
     main = "kr.madesv.extension.MadeExtensionPlugin"
@@ -50,9 +50,15 @@ dependencies {
         Dependency.GUICE,
         Dependency.LOMBOK,
         Dependency.JAVAX_INJECT,
-        Dependency.AOPALLIANCE
+        Dependency.AOPALLIANCE,
+        Dependency.BYTEBUDDY,
+        Dependency.BYTEBUDDY_AGENT
     )
+    annotationProcessor(Dependency.LOMBOK.dependency)
+
     testImplementation(Dependency.TOWNY.dependency)
+    testImplementation(Dependency.BYTEBUDDY_AGENT.dependency)
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
@@ -61,12 +67,17 @@ tasks.test {
     useJUnitPlatform()
 }
 
+private object BuildConfig {
+    const val BUKKIT_TESTING = false
+}
+
 tasks {
     val testBukkitModulePath = "../TEST_BUKKIT"
 
     shadowJar {
         archiveFileName.set("${bukkit.name}-${bukkit.version}.jar")
-        destinationDirectory.set(file("$testBukkitModulePath/plugins"))
+        val path = if (BuildConfig.BUKKIT_TESTING) "$testBukkitModulePath/plugins" else "output"
+        destinationDirectory.set(file(path))
     }
 
     this.register<TestBukkitTask>("runTestBukkitTask") {

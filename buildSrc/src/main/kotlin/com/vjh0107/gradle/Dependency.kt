@@ -48,4 +48,14 @@ interface Dependency {
         override val maven = null
         override val dependency = "org.projectlombok:lombok:1.18.22"
     }
+
+    object BYTEBUDDY : Dependency {
+        override val maven = null
+        override val dependency = "net.bytebuddy:byte-buddy:1.12.9"
+    }
+
+    object BYTEBUDDY_AGENT : Dependency {
+        override val dependency = "net.bytebuddy:byte-buddy-agent:1.12.9"
+        override val maven = null
+    }
 }

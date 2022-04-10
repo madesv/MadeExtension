@@ -10,7 +10,10 @@ import kr.madesv.extension.skript.mcmmo.McMMORegistrar;
 import kr.madesv.extension.skript.towny.TownyRegistrar;
 import kr.madesv.extension.towny.TownyReflection;
 import lombok.SneakyThrows;
+import net.bytebuddy.agent.ByteBuddyAgent;
+import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import javax.inject.Inject;
 import java.util.Optional;
 
@@ -31,21 +34,42 @@ public class MadeExtensionPlugin extends JavaPlugin {
 
     public static Injector injector;
 
+    public static ClassReloadingStrategy classReloadingStrategy;
+
+    static {
+        boolean isSuccess = true;
+        try {
+            ByteBuddyAgent.install();
+            classReloadingStrategy = ClassReloadingStrategy.fromInstalledAgent();
+            TownyReflection.overridePermission();
+
+        } catch (Exception ignored) {
+            isSuccess = false;
+        }
+        if (isSuccess) {
+            System.out.println("TownyPermission 클래스를 redefine 하였습니다.");
+        } else {
+            System.out.println("TownyPermission 클래스를 redefine 하지 않았습니다.");
+        }
+    }
+
     @SneakyThrows
     @Override
     public void onEnable() {
         MadeExtensionModule module = new MadeExtensionModule(this);
         injector = module.createInjector();
         injector.injectMembers(this);
+
         if (maybeTowny.isPresent()) {
             try {
-                TownyReflection.override();
+                TownyReflection.overrideDateFormat();
                 this.getLogger().info("Towny의 SimpleDateFormat 필드를 성공적으로 override 하였습니다.");
             } catch (Exception exception) {
                 this.getLogger().severe("Towny의 SimpleDateFormat 필드를 override 하는데에 성공한 줄 알았으나 실패하였습니다. Towny의 버전이 호환되지 않아 생기는 문제일 가능성이 높습니다.");
                 exception.printStackTrace();
             }
         }
+
         if (maybeSkript.isPresent()) {
             this.getLogger().info("스크립트 플러그인을 성공적으로 로드하였습니다.");
             this.getLogger().info("Extension들을 등록합니다...");
