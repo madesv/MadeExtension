@@ -47,9 +47,9 @@ public class MadeExtensionPlugin extends JavaPlugin {
             isSuccess = false;
         }
         if (isSuccess) {
-            System.out.println("TownyPermission 클래스를 redefine 하였습니다.");
+            System.out.println("TownyPermission 클래스, TownyWorldCommand 클래스를 redefine 하였습니다.");
         } else {
-            System.out.println("TownyPermission 클래스를 redefine 하지 않았습니다.");
+            System.out.println("TownyPermission 클래스, TownyWorldCommand 클래스를 redefine 하지 않았습니다.");
         }
     }
 

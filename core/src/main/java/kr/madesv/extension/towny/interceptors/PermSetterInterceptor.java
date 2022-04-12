@@ -1,11 +1,12 @@
-package kr.madesv.extension.towny;
+package kr.madesv.extension.towny.interceptors;
 
 import com.palmergames.bukkit.towny.object.TownyPermission;
+import kr.madesv.extension.towny.TownyTranslation;
 import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bind.annotation.This;
 
-public class TownyMethodInterceptor {
+public class PermSetterInterceptor {
     @RuntimeType
     public static Object intercept(@AllArguments Object[] allArguments, @This Object proxy) {
         String string = (String) allArguments[0];

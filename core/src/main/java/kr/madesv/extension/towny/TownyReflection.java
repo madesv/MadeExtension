@@ -1,7 +1,10 @@
 package kr.madesv.extension.towny;
 
 import com.palmergames.bukkit.towny.TownyFormatter;
+import com.palmergames.bukkit.towny.command.TownyWorldCommand;
 import com.palmergames.bukkit.towny.object.TownyPermission;
+import kr.madesv.extension.towny.interceptors.PermSetterInterceptor;
+import kr.madesv.extension.towny.interceptors.WorldPermSetterInterceptor;
 import kr.madesv.extension.utils.reflection.FieldUtil;
 import lombok.SneakyThrows;
 import net.bytebuddy.ByteBuddy;
@@ -21,13 +24,20 @@ public class TownyReflection {
         setActionTypeCommonNameField(TownyPermission.ActionType.SWITCH, TownyTranslation.SWITCH.getTranslatedName());
         setActionTypeCommonNameField(TownyPermission.ActionType.ITEM_USE, TownyTranslation.ITEM_USE.getTranslatedName());
 
-        new ByteBuddy()
-                .redefine(TownyPermission.class)
-                .method(named("load"))
-                .intercept(MethodDelegation.to(TownyMethodInterceptor.class))
-                .make()
-                .load(TownyPermission.class.getClassLoader(), classReloadingStrategy);
+        redefineMethod(TownyPermission.class, "load", PermSetterInterceptor.class);
+        redefineMethod(TownyWorldCommand.class, "worldSet", WorldPermSetterInterceptor.class);
     }
+
+    @SuppressWarnings("unchecked")
+    private static void redefineMethod(Class clazz, String methodName, Class interceptor) {
+        new ByteBuddy()
+                .redefine(clazz)
+                .method(named(methodName))
+                .intercept(MethodDelegation.to(interceptor))
+                .make()
+                .load(clazz.getClassLoader(), classReloadingStrategy);
+    }
+
     @SneakyThrows
     public static void overrideDateFormat() throws Exception {
         setDateFormatField("registeredFormat", "yyyy.MM.dd");
