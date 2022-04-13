@@ -6,12 +6,14 @@ import com.palmergames.bukkit.towny.command.TownyWorldCommand;
 import com.palmergames.bukkit.towny.object.TownyWorld;
 import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.util.StringMgmt;
+import kr.madesv.extension.towny.TownyTranslation;
 import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bind.annotation.This;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,12 +21,15 @@ import java.util.Locale;
 
 public class WorldPermSetterInterceptor {
     @RuntimeType
-    public static Object intercept(@AllArguments Object[] allArguments, @This Object proxy) {
+    public static Object intercept(@AllArguments Object[] allArguments, @This Object proxy) throws NoSuchFieldException, IllegalAccessException {
         CommandSender sender = (CommandSender) allArguments[0];
         String[] split = (String[]) allArguments[1];
         TownyWorldCommand townyWorldCommand = (TownyWorldCommand) proxy;
 
-        TownyWorld globalWorld = TownyAPI.getInstance().getTownyWorld(split[0]);
+        Field globalWorldField = townyWorldCommand.getClass().getDeclaredField("globalWorld");
+        globalWorldField.setAccessible(true);
+        TownyWorld globalWorld = (TownyWorld) globalWorldField.get(townyWorldCommand);
+
         Towny plugin = Towny.getPlugin();
 
         if (split.length == 0) {
@@ -46,10 +51,10 @@ public class WorldPermSetterInterceptor {
                 } else
                     try {
                         List<String> perms = Arrays.asList(String.join(",", StringMgmt.remFirstArg(split)).toLowerCase(Locale.ROOT).split(","));
-                        globalWorld.setUnclaimedZoneBuild(perms.contains("build"));
-                        globalWorld.setUnclaimedZoneDestroy(perms.contains("destroy"));
-                        globalWorld.setUnclaimedZoneSwitch(perms.contains("switch"));
-                        globalWorld.setUnclaimedZoneItemUse(perms.contains("itemuse") || perms.contains("item_use"));
+                        globalWorld.setUnclaimedZoneBuild(perms.contains(TownyTranslation.BUILD.getTranslatedName()));
+                        globalWorld.setUnclaimedZoneDestroy(perms.contains(TownyTranslation.DESTROY.getTranslatedName()));
+                        globalWorld.setUnclaimedZoneSwitch(perms.contains(TownyTranslation.SWITCH.getTranslatedName()));
+                        globalWorld.setUnclaimedZoneItemUse(perms.contains(TownyTranslation.ITEM_USE.getTranslatedName()));
 
                         plugin.resetCache();
                         TownyMessaging.sendMsg(sender, Translatable.of("msg_set_wild_perms", globalWorld.getName(), perms.toString()));

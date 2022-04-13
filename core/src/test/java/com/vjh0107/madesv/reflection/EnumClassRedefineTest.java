@@ -1,4 +1,4 @@
-package com.vjh0107.madesv;
+package com.vjh0107.madesv.reflection;
 
 import com.palmergames.bukkit.towny.object.TownyPermission;
 import com.palmergames.bukkit.towny.object.TownyPermission.ActionType;
