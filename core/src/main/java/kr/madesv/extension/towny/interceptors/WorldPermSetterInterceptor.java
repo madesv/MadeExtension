@@ -51,6 +51,7 @@ public class WorldPermSetterInterceptor {
                 } else
                     try {
                         List<String> perms = Arrays.asList(String.join(",", StringMgmt.remFirstArg(split)).toLowerCase(Locale.ROOT).split(","));
+                        System.out.println(perms);
                         globalWorld.setUnclaimedZoneBuild(perms.contains(TownyTranslation.BUILD.getTranslatedName()));
                         globalWorld.setUnclaimedZoneDestroy(perms.contains(TownyTranslation.DESTROY.getTranslatedName()));
                         globalWorld.setUnclaimedZoneSwitch(perms.contains(TownyTranslation.SWITCH.getTranslatedName()));

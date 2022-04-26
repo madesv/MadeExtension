@@ -11,7 +11,7 @@ plugins {
     id("com.github.johnrengelman.shadow")
 }
 
-version = "3.0.3"
+version = "3.0.4"
 
 bukkit {
     main = "kr.madesv.extension.MadeExtensionPlugin"
