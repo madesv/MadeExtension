@@ -196,6 +196,8 @@ public class TownyRegistrar extends SkriptRegistrarModule {
                 "[madesv] [towny] (all|the) nations");
         Skript.registerExpression(ExprTownyAllTowns.class, String.class, ExpressionType.SIMPLE,
                 "[madesv] [towny] (all|the) towns");
+        Skript.registerExpression(ExprTownyFriends.class, OfflinePlayer.class, ExpressionType.SIMPLE,
+                "[madesv] [all] friends of %player%");
         Skript.registerExpression(ExprTownyTownAtLocation.class, String.class, ExpressionType.SIMPLE,
                 "[madesv] [towny] town at %location%");
         Skript.registerExpression(ExprTownyNationBalance.class, Number.class, ExpressionType.SIMPLE,

@@ -37,19 +37,19 @@ public class MadeExtensionPlugin extends JavaPlugin {
     public static ClassReloadingStrategy classReloadingStrategy;
 
     static {
-        boolean isSuccess = true;
+        boolean foundTowny = true;
         try {
+            Class.forName("com.palmergames.bukkit.towny.Towny");
+        } catch (Exception ignored) {
+            foundTowny = false;
+        }
+
+        if (foundTowny) {
             ByteBuddyAgent.install();
             classReloadingStrategy = ClassReloadingStrategy.fromInstalledAgent();
             TownyReflection.overridePermission();
 
-        } catch (Exception ignored) {
-            isSuccess = false;
-        }
-        if (isSuccess) {
             System.out.println("TownyPermission 클래스, TownyWorldCommand 클래스를 redefine 하였습니다.");
-        } else {
-            System.out.println("TownyPermission 클래스, TownyWorldCommand 클래스를 redefine 하지 않았습니다.");
         }
     }
 
