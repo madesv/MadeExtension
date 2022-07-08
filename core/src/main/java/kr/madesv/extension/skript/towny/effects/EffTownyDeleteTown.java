@@ -13,9 +13,6 @@ import javax.inject.Inject;
 public class EffTownyDeleteTown extends Effect {
 	private Expression<String> s;
 
-	@Inject
-	MadeExtensionPlugin plugin;
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean init(Expression<?>[] expr, int matchedPattern, Kleenean paramKleenean,

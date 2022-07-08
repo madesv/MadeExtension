@@ -9,6 +9,7 @@ import ch.njol.util.Kleenean;
 import com.palmergames.bukkit.TownyChat.Chat;
 import com.palmergames.bukkit.TownyChat.channels.Channel;
 import kr.madesv.extension.MadeExtensionPlugin;
+import kr.madesv.extension.towny.TownyChatProvider;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -23,7 +24,7 @@ public class ExprPlayerChannel extends SimpleExpression {
     private Expression<Player> player;
 
     @Inject
-    Optional<Chat> chat;
+    Optional<TownyChatProvider> chat;
 
     @Override
     public Class<? extends String> getReturnType() {
@@ -51,7 +52,7 @@ public class ExprPlayerChannel extends SimpleExpression {
     @Override
     protected String[] get(Event e) {
         Player player = this.player.getSingle(e);
-        Chat townyChat = chat.get();
+        Chat townyChat = chat.orElseThrow().instance;
 
         return new String[]{townyChat.getPlayerChannel(player).getName()};
     }

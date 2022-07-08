@@ -5,10 +5,13 @@ import com.gmail.nossr50.mcMMO;
 import com.google.inject.Injector;
 import com.palmergames.bukkit.TownyChat.Chat;
 import com.palmergames.bukkit.towny.Towny;
-import kr.madesv.extension.skript.SkriptRegistrarModule;
+import kr.madesv.extension.skript.SkriptRegistrarComponent;
 import kr.madesv.extension.skript.mcmmo.McMMORegistrar;
 import kr.madesv.extension.skript.towny.TownyRegistrar;
+import kr.madesv.extension.towny.TownyChatProvider;
+import kr.madesv.extension.towny.TownyProvider;
 import kr.madesv.extension.towny.TownyReflection;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import net.bytebuddy.agent.ByteBuddyAgent;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
@@ -24,17 +27,20 @@ public class MadeExtensionPlugin extends JavaPlugin {
     Optional<Skript> maybeSkript;
 
     @Inject
-    Optional<Towny> maybeTowny;
+    Optional<TownyProvider> maybeTowny;
 
     @Inject
     Optional<mcMMO> maybeMcMMO;
 
     @Inject
-    Optional<Chat> maybeTownyChat;
+    Optional<TownyChatProvider> maybeTownyChat;
 
     public static Injector injector;
 
     public static ClassReloadingStrategy classReloadingStrategy;
+
+    @Getter
+    public static MadeExtensionPlugin instance;
 
     static {
         boolean foundTowny = true;
@@ -51,6 +57,11 @@ public class MadeExtensionPlugin extends JavaPlugin {
 
             System.out.println("TownyPermission 클래스, TownyWorldCommand 클래스를 redefine 하였습니다.");
         }
+    }
+
+    @Override
+    public void onLoad() {
+        instance = this;
     }
 
     @SneakyThrows
@@ -75,15 +86,13 @@ public class MadeExtensionPlugin extends JavaPlugin {
             this.getLogger().info("Extension들을 등록합니다...");
 
             if (maybeTowny.isPresent() && maybeTownyChat.isPresent()) {
-                registerSkriptExtensionModule(new TownyRegistrar());
+                registerSkriptRegistrarComponent(new TownyRegistrar());
                 this.getLogger().info("Towny와 관련된 Extension을 성공적으로 등록하였습니다.");
-                maybeTownyChat.get().getLogger().info("TownyChat 이 성공적으로 MadeExtension과 연동되었습니다.");
-
             } else {
                 this.getLogger().info("§cTowny와 TownyChat를 찾지 못하였습니다.");
             }
             if (maybeMcMMO.isPresent()) {
-                registerSkriptExtensionModule(new McMMORegistrar());
+                registerSkriptRegistrarComponent(new McMMORegistrar());
                 this.getLogger().info("mcMMO와 관련된 Extension을 성공적으로 등록하였습니다.");
             } else {
                 this.getLogger().info("§cmcMMO를 찾지 못하였습니다.");
@@ -95,7 +104,7 @@ public class MadeExtensionPlugin extends JavaPlugin {
         }
     }
 
-    public void registerSkriptExtensionModule(SkriptRegistrarModule registrar) {
+    public void registerSkriptRegistrarComponent(SkriptRegistrarComponent registrar) {
         registrar.register(injector);
     }
 }

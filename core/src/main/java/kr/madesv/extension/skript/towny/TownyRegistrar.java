@@ -11,13 +11,12 @@ import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.registrations.Converters;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
-import com.google.inject.Injector;
 import com.palmergames.bukkit.towny.event.*;
 import com.palmergames.bukkit.towny.event.damage.TownyPlayerDamagePlayerEvent;
 import com.palmergames.bukkit.towny.event.town.TownUnclaimEvent;
 import com.palmergames.bukkit.towny.object.TownBlockType;
 import com.palmergames.bukkit.towny.object.TownBlockTypeHandler;
-import kr.madesv.extension.skript.SkriptRegistrarModule;
+import kr.madesv.extension.skript.SkriptRegistrarComponent;
 import kr.madesv.extension.skript.towny.effects.*;
 import kr.madesv.extension.skript.towny.expressions.*;
 import org.bukkit.OfflinePlayer;
@@ -26,7 +25,7 @@ import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
 
-public class TownyRegistrar extends SkriptRegistrarModule {
+public class TownyRegistrar extends SkriptRegistrarComponent {
     @Override
     public void register() {
         // Town Types:

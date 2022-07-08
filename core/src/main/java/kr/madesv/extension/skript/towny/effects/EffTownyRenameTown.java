@@ -23,6 +23,7 @@ public class EffTownyRenameTown extends Effect {
 	@Override
 	public boolean init(Expression<?>[] expr, int matchedPattern, Kleenean paramKleenean,
 			SkriptParser.ParseResult paramParseResult) {
+		MadeExtensionPlugin.injector.injectMembers(this);
 		s = (Expression<String>) expr[0];
 		s2 = (Expression<String>) expr[1];
 

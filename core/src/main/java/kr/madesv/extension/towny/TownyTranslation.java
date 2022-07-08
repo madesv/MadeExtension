@@ -3,8 +3,6 @@ package kr.madesv.extension.towny;
 import com.palmergames.bukkit.towny.object.TownyPermission;
 import lombok.Getter;
 
-import java.util.Arrays;
-
 public enum TownyTranslation {
     BUILD(TownyPermission.ActionType.BUILD, "설치", "build"),
     DESTROY(TownyPermission.ActionType.DESTROY, "파괴", "destroy"),

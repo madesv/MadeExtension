@@ -24,6 +24,7 @@ public class EffTownyKickPlayerFromTown extends Effect {
 	@Override
 	public boolean init(Expression<?>[] expr, int matchedPattern, Kleenean paramKleenean,
 			SkriptParser.ParseResult paramParseResult) {
+		MadeExtensionPlugin.injector.injectMembers(this);
 		p = (Expression<OfflinePlayer>) expr[0];
 		s = (Expression<String>) expr[1];
 

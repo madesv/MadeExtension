@@ -2,8 +2,7 @@ package kr.madesv.extension.skript.mcmmo;
 
 import javax.annotation.Nullable;
 
-import com.google.inject.Injector;
-import kr.madesv.extension.skript.SkriptRegistrarModule;
+import kr.madesv.extension.skript.SkriptRegistrarComponent;
 import kr.madesv.extension.skript.mcmmo.conditions.*;
 import kr.madesv.extension.skript.mcmmo.effects.*;
 import kr.madesv.extension.skript.mcmmo.expressions.*;
@@ -33,7 +32,7 @@ import ch.njol.skript.registrations.Converters;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 
-public class McMMORegistrar extends SkriptRegistrarModule {
+public class McMMORegistrar extends SkriptRegistrarComponent {
 	@Override
 	public void register() {
 		Boolean failed = false;

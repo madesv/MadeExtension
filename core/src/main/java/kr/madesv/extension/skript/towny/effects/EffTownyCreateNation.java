@@ -31,6 +31,7 @@ public class EffTownyCreateNation extends Effect {
 	@Override
 	public boolean init(Expression<?>[] expr, int matchedPattern, @NotNull Kleenean paramKleenean,
 						@NotNull SkriptParser.ParseResult paramParseResult) {
+		MadeExtensionPlugin.injector.injectMembers(this);
 		nat = (Expression<String>) expr[0];
 		tow = (Expression<String>) expr[1];
 		bal = (Expression<Number>) expr[2];

@@ -5,18 +5,13 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.palmergames.bukkit.towny.TownyUniverse;
-import kr.madesv.extension.MadeExtensionPlugin;
 import lombok.SneakyThrows;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 public class EffTownyAddPlayerToNation extends Effect {
-
-	@Inject
-	MadeExtensionPlugin plugin;
 
 	private Expression<OfflinePlayer> p;
 	private Expression<String> nat;

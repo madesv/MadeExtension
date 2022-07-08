@@ -32,6 +32,7 @@ public class EffTownyCreateTown extends Effect {
     @Override
     public boolean init(Expression<?>[] expr, int matchedPattern, @NotNull Kleenean paramKleenean,
                         @NotNull SkriptParser.ParseResult paramParseResult) {
+        MadeExtensionPlugin.injector.injectMembers(this);
         s = (Expression<String>) expr[0];
         homespawn = (Expression<Location>) expr[1];
         sb = (Expression<Number>) expr[2];

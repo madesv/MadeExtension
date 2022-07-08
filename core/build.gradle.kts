@@ -11,7 +11,7 @@ plugins {
     id("com.github.johnrengelman.shadow")
 }
 
-version = "3.0.5"
+version = "3.1.0"
 
 bukkit {
     main = "kr.madesv.extension.MadeExtensionPlugin"
@@ -44,13 +44,12 @@ dependencies {
         Dependency.SPIGOT,
         Dependency.SKRIPT,
         Dependency.TOWNY,
-        Dependency.MCMMO
+        Dependency.MCMMO,
+        Dependency.LOMBOK
     )
     implementationOf(
         Dependency.GUICE,
-        Dependency.LOMBOK,
         Dependency.JAVAX_INJECT,
-        Dependency.AOPALLIANCE,
         Dependency.BYTEBUDDY,
         Dependency.BYTEBUDDY_AGENT
     )
